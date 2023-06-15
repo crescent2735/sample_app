@@ -37,19 +37,19 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = false
 
-  host = 'sample-app-a2jg.onrender.com'
-  config.action_mailer.default_url_options = { host: host }
-  ActionMailer::Base.smtp_settings = {
-    :port           => 587,
-    :address        => 'smtp.mailgun.org',
-    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
-    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => host,
-    :authentication => :plain,
-  }
+  # クラウドIDEの場合は以下をお使いください
+  host = '8526f98d21c54787b68c1e128c2473de.vfs.cloud9.ap-northeast-1.amazonaws.com' # 自分の環境のホストに変えてください。
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  # ActionMailer::Base.smtp_settings = {
+  #   :port           => 587,
+  #   :address        => 'smtp.mailgun.org',
+  #   :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+  #   :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+  #   :domain         => host,
+  #   :authentication => :plain,
+  # }
 
   config.action_mailer.perform_caching = false
 
