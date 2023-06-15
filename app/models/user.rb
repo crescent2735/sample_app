@@ -67,7 +67,10 @@ class User < ApplicationRecord
 
     # 有効化トークンとダイジェストを作成および代入する
     def create_activation_digest
+      logger.info(self.inspect)
       self.activation_token  = User.new_token
+      logger.info(self.inspect)
+      logger.info(User.digest(activation_token))
       self.activation_digest = User.digest(activation_token)
     end
 
